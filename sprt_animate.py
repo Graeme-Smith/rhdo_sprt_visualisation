@@ -9,8 +9,8 @@ from typing import Tuple
 def compute_log_boundaries(alpha: float, beta: float) -> tuple[float, float]:
     """Return (lower_a, upper_b) boundaries in log-space for SPRT.
 
-    Lower boundary is a = ln(B) where B = beta / (1 - alpha)
-    Upper boundary is b = ln(A) where A = (1 - beta) / alpha
+    Lower boundary is a = ln(B) where B = β / (1 - α)
+    Upper boundary is b = ln(A) where A = (1 - β) / α
     """
     if not (0 < alpha < 1 and 0 < beta < 1):
         raise ValueError("alpha and beta must be in (0, 1)")
@@ -217,8 +217,8 @@ def animate_sprt(
         x_data = np.arange(len(llr_path))
         line_llr, = ax.plot([], [], color="#2c7be5", lw=2, label="Cumulative LLR")
         marker_current, = ax.plot([], [], "o", color="#2c7be5")
-        lower_line = ax.axhline(lower_a, color="#d9534f", lw=1.5, ls="--", label="Lower boundary a")
-        upper_line = ax.axhline(upper_b, color="#5cb85c", lw=1.5, ls="--", label="Upper boundary b")
+        lower_line = ax.axhline(lower_a, color="#d9534f", lw=1.5, ls="--", label="Lower boundary: a = ln(β/(1-α))")
+        upper_line = ax.axhline(upper_b, color="#5cb85c", lw=1.5, ls="--", label="Upper boundary: b = ln((1-β)/α)")
         ax.set_xlim(0, min(len(x_data) - 1, end_frame))
         min_y = min(lower_a, float(np.min(llr_path)))
         max_y = max(upper_b, float(np.max(llr_path)))
@@ -271,8 +271,8 @@ def animate_sprt(
         x_data = np.arange(len(llr_path))
         line_llr, = ax_llr.plot([], [], color="#2c7be5", lw=2, label="Cumulative LLR")
         marker_current, = ax_llr.plot([], [], "o", color="#2c7be5")
-        lower_line = ax_llr.axhline(lower_a, color="#d9534f", lw=1.5, ls="--", label="Lower boundary a")
-        upper_line = ax_llr.axhline(upper_b, color="#5cb85c", lw=1.5, ls="--", label="Upper boundary b")
+        lower_line = ax_llr.axhline(lower_a, color="#d9534f", lw=1.5, ls="--", label="Lower boundary: a = ln(β/(1-α))")
+        upper_line = ax_llr.axhline(upper_b, color="#5cb85c", lw=1.5, ls="--", label="Upper boundary: b = ln((1-β)/α)")
         ax_llr.set_xlim(0, end_frame)
         min_y = min(lower_a, float(np.min(llr_path)))
         max_y = max(upper_b, float(np.max(llr_path)))
